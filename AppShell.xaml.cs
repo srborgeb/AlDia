@@ -1,4 +1,4 @@
-﻿namespace Al_Dia
+﻿namespace AlDia
 {
     public partial class AppShell : Shell
     {

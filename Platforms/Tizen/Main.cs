@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace Al_Dia
+namespace AlDia
 {
     internal class Program : MauiApplication
     {

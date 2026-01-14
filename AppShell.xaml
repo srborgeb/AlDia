@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Al_Dia.AppShell"
+    x:Class="AlDia.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlDia"
     Shell.FlyoutBehavior="Disabled"
-    Title="Al_Dia">
+    Title="AlDia">
 
     <ShellContent
         Title="Home"

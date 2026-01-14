@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Al_Dia
+namespace AlDia
 {
     public class Program
     {

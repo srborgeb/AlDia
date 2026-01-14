@@ -1,52 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:AlDia.ViewModels"
+             xmlns:viewmodels="clr-namespace:AlDia.ViewModels"
+             xmlns:models="clr-namespace:AlDia.Models"
+             xmlns:converters="clr-namespace:AlDia.Converters"
              x:Class="AlDia.MainPage"
              Title="Al Día - Mis Documentos">
 
-    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="10">
+    <ContentPage.Resources>
+        <converters:ConvertidorBytesAImagen x:Key="ConvertidorBytesAImagen" />
+    </ContentPage.Resources>
 
-        <!-- Formulario de Entrada -->
-        <VerticalStackLayout Grid.Row="0" Spacing="10" BackgroundColor="#F0F0F0" Padding="15">
-            <Label Text="Nuevo Documento" FontAttributes="Bold" FontSize="18"/>
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
 
-            <Entry Placeholder="Nombre (Ej: Pasaporte)" Text="{Binding Nombre}" />
-            <Entry Placeholder="Número (Opcional)" Text="{Binding Numero}" />
+        <Frame Grid.Row="0" Margin="0,0,0,20" CornerRadius="10" HasShadow="True">
+            <VerticalStackLayout Spacing="10">
+                <HorizontalStackLayout Spacing="5" IsVisible="{Binding EstaEditando}">
+                    <Label Text="✏️ Editando documento" FontAttributes="Italic" TextColor="{StaticResource Primary}" FontSize="12"/>
+                    <Button Text="X" Command="{Binding CancelarEdicionCommand}" BackgroundColor="Transparent" TextColor="Red" Padding="0" HeightRequest="20"/>
+                </HorizontalStackLayout>
 
-            <Label Text="Fecha de Vencimiento:"/>
-            <DatePicker Date="{Binding FechaVencimiento}" />
+                <Entry Placeholder="Título del documento" Text="{Binding NuevoTitulo}" FontAttributes="Bold"/>
+                <Editor Placeholder="Descripción o detalles..." Text="{Binding NuevaDescripcion}" AutoSize="TextChanges" HeightRequest="60" />
 
-            <Label Text="Días para avisar antes:"/>
-            <Entry Text="{Binding DiasAnticipacion}" Keyboard="Numeric" />
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" VerticalOptions="Center">
+                    <Label Text="Renovar cada (días):" VerticalOptions="Center" FontSize="14" />
+                    <Entry Grid.Column="1" Text="{Binding DiasRepeticionTexto}" Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" />
+                </Grid>
 
-            <Button Text="Guardar Documento" Command="{Binding GuardarCommand}" />
-        </VerticalStackLayout>
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                    <Button Grid.Column="0" Text="📷 Cámara" Command="{Binding TomarFotoCommand}" BackgroundColor="#2196F3" TextColor="White" />
+                    <Button Grid.Column="1" Text="📁 Galería" Command="{Binding SeleccionarFotoCommand}" BackgroundColor="Gray" TextColor="White" />
+                </Grid>
 
-        <!-- Lista de Documentos -->
+                <Button Text="{Binding TextoBotonGuardar}" Command="{Binding GuardarDocumentoCommand}" BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" />
+            </VerticalStackLayout>
+        </Frame>
+
         <CollectionView Grid.Row="1" ItemsSource="{Binding Documentos}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Margin="0,5" Padding="10">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="{Binding Numero}" TextColor="Gray"/>
-                                <Label Text="{Binding FechaVencimiento, StringFormat='Vence: {0:dd/MM/yyyy}'}" TextColor="Red"/>
+                <DataTemplate x:DataType="models:Documento">
+                    <Frame Margin="0,5" Padding="12" CornerRadius="8" HasShadow="False" BorderColor="#E0E0E0">
+                        <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
+                            <Image Grid.Column="0" Source="{Binding DatosFoto, Converter={StaticResource ConvertidorBytesAImagen}}" WidthRequest="60" HeightRequest="60" Aspect="AspectFill" IsVisible="{Binding TieneFoto}">
+                                <Image.Clip>
+                                    <RoundRectangleGeometry CornerRadius="10" />
+                                </Image.Clip>
+                            </Image>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="15" />
+                                <Label Text="{Binding TextoRepeticion}" FontSize="10" TextColor="#2196F3" FontAttributes="Italic" />
+                                <Label Text="{Binding FechaProximoRecordatorio, StringFormat='Próximo: {0:dd/MM/yy}'}" FontSize="10" TextColor="DarkOrange" />
                             </VerticalStackLayout>
 
-                            <Button Grid.Column="1" 
-                                    Text="X" 
-                                    BackgroundColor="Red" 
-                                    WidthRequest="40"
-                                    HeightRequest="40"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EliminarCommand}"
-                                    CommandParameter="{Binding .}"/>
+                            <HorizontalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="5">
+                                <Button Text="✏️" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=PrepararEdicionCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" TextColor="Blue" FontSize="18" />
+                                <Button Text="🗑" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EliminarDocumentoCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" TextColor="Red" FontSize="18" />
+                            </HorizontalStackLayout>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
 
+        <Label Grid.Row="2" Text="Al Día - Gestión y Renovación" HorizontalOptions="Center" TextColor="Gray" FontSize="11" Margin="0,10,0,0" />
+    </Grid>
 </ContentPage>

@@ -1,14 +1,13 @@
 ﻿namespace AlDia
 {
+    // Este archivo es vital para corregir el error CS0311 en MauiProgram.cs
     public partial class App : Application
     {
-        // El constructor recibe MainPage gracias a la inyección de dependencias
-        public App(MainPage mainPage)
+        public App()
         {
             InitializeComponent();
 
-            // Usamos NavigationPage para tener una barra de título bonita
-            MainPage = new NavigationPage(mainPage);
+            MainPage = new AppShell();
         }
     }
 }

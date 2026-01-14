@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Al_Dia
+namespace AlDia
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

@@ -1,24 +1,21 @@
 ﻿using AlDia.ViewModels;
-using Plugin.LocalNotification;
+using Microsoft.Maui.Controls;
 
 namespace AlDia
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(MainViewModel vm)
+        public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext = viewModel;
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Solicitar permisos en Android 13+ al iniciar
-            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
-            {
-                await LocalNotificationCenter.Current.RequestNotificationPermission();
-            }
+            var vm = BindingContext as MainViewModel;
+            vm?.CargarDocumentosCommand.Execute(null);
         }
     }
 }
