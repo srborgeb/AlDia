@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using AlDia.Services;
 using AlDia.ViewModels;
-using AlDia.Views; // Espacio de nombres para las vistas
-using Microsoft.Maui.Controls.Hosting;
-using Microsoft.Maui.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using AlDia.Views;
 
 namespace AlDia
 {
@@ -21,22 +18,23 @@ namespace AlDia
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // Registro de Servicios
-            builder.Services.AddSingleton<ServicioBaseDatos>();
-            builder.Services.AddSingleton<IServicioNotificaciones, ServicioNotificaciones>();
-
-            // Registro de ViewModels
-            builder.Services.AddSingleton<MainViewModel>();
-
-            // Registro de Páginas (Necesario para que el Shell y la DI funcionen)
-            builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<PaginaDocumentos>();
-            builder.Services.AddSingleton<PaginaConfiguracion>();
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
+            // REGISTRO DE SERVICIOS
+            // Aquí corregimos el nombre: usamos DatabaseService en lugar de ServicioBaseDatos
+            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<ServicioNotificaciones>();
+
+            // REGISTRO DE VIEWMODELS
+            builder.Services.AddSingleton<MainViewModel>();
+
+            // REGISTRO DE VISTAS (PÁGINAS)
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<PaginaDocumentos>();
+            builder.Services.AddTransient<PaginaConfiguracion>();
+
             return builder.Build();
         }
     }

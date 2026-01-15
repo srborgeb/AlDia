@@ -5,33 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlDia"
     xmlns:views="clr-namespace:AlDia.Views"
-    Shell.FlyoutBehavior="Flyout"
-    Title="Al Día">
+    Shell.FlyoutBehavior="Flyout">
 
-    <Shell.FlyoutHeader>
-        <Grid HeightRequest="150" BackgroundColor="{DynamicResource Primary}">
-            <Label Text="Al Día" 
-                   TextColor="White" 
-                   FontAttributes="Bold" 
-                   FontSize="24"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center" />
-        </Grid>
-    </Shell.FlyoutHeader>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
-    <FlyoutItem Title="Inicio" Icon="dotnet_bot.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-    </FlyoutItem>
+    <ShellContent
+        Title="Documentos"
+        ContentTemplate="{DataTemplate views:PaginaDocumentos}"
+        Route="PaginaDocumentos" />
 
-    <FlyoutItem Title="Mis Documentos" Icon="dotnet_bot.png">
-        <ShellContent ContentTemplate="{DataTemplate views:PaginaDocumentos}" />
-    </FlyoutItem>
+    <ShellContent
+        Title="Configuración"
+        ContentTemplate="{DataTemplate views:PaginaConfiguracion}"
+        Route="PaginaConfiguracion" />
 
-    <FlyoutItem Title="Configuración" Icon="dotnet_bot.png">
-        <ShellContent ContentTemplate="{DataTemplate views:PaginaConfiguracion}" />
-    </FlyoutItem>
-
-    <MenuItem Text="Salir" 
-              Command="{Binding SalirCommand}" />
+    <!-- Opción de Salir en el Menú Inferior/Lateral -->
+    <MenuItem Text="Salir" Clicked="OnExitClicked" IconImageSource="dotnet_bot.png" />
 
 </Shell>

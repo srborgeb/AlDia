@@ -1,45 +1,49 @@
 ﻿using SQLite;
 using AlDia.Models;
-// Necesario para FileSystem
-using Microsoft.Maui.Storage;
 
 namespace AlDia.Services
 {
-    public class ServicioBaseDatos
+    public class DatabaseService
     {
-        private SQLiteAsyncConnection _conexion;
+        private SQLiteAsyncConnection? _database;
 
-        private async Task Inicializar()
+        async Task Init()
         {
-            if (_conexion is not null)
+            if (_database is not null)
                 return;
 
-            // FileSystem requiere Microsoft.Maui.Storage
-            var rutaBaseDatos = Path.Combine(FileSystem.AppDataDirectory, "AlDiaDB.db3");
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "AlDia.db3");
 
-            _conexion = new SQLiteAsyncConnection(rutaBaseDatos);
-            await _conexion.CreateTableAsync<Documento>();
+            _database = new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+
+            await _database.CreateTableAsync<Documento>();
         }
 
         public async Task<List<Documento>> ObtenerDocumentosAsync()
         {
-            await Inicializar();
-            return await _conexion.Table<Documento>().ToListAsync();
+            await Init();
+            return await _database!.Table<Documento>().ToListAsync();
+        }
+
+        public async Task<Documento> ObtenerDocumentoPorIdAsync(int id)
+        {
+            await Init();
+            return await _database!.Table<Documento>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<int> GuardarDocumentoAsync(Documento documento)
         {
-            await Inicializar();
+            await Init();
             if (documento.Id != 0)
-                return await _conexion.UpdateAsync(documento);
+                return await _database!.UpdateAsync(documento);
             else
-                return await _conexion.InsertAsync(documento);
+                return await _database!.InsertAsync(documento);
         }
 
         public async Task<int> EliminarDocumentoAsync(Documento documento)
         {
-            await Inicializar();
-            return await _conexion.DeleteAsync(documento);
+            await Init();
+            return await _database!.DeleteAsync(documento);
         }
     }
 }

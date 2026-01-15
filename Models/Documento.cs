@@ -8,11 +8,11 @@ namespace AlDia.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = string.Empty;
 
-        public string NumeroDocumento { get; set; }
+        public string NumeroDocumento { get; set; } = string.Empty;
 
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
 
         public DateTime FechaVencimiento { get; set; } = DateTime.Now;
 
@@ -25,7 +25,7 @@ namespace AlDia.Models
 
         public int DiasRepeticion { get; set; }
 
-        public byte[] DatosFoto { get; set; }
+        public byte[]? DatosFoto { get; set; }
 
         public bool EstaAlDia { get; set; }
 

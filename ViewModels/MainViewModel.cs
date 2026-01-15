@@ -1,185 +1,245 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using AlDia.Models;
 using AlDia.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Graphics.Platform;
-using Microsoft.Maui.Media;
-using Microsoft.Maui.ApplicationModel;
 
 namespace AlDia.ViewModels
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : INotifyPropertyChanged
     {
-        private readonly ServicioBaseDatos _servicioBaseDatos;
-        private readonly IServicioNotificaciones _servicioNotificaciones;
+        private readonly DatabaseService _databaseService;
+        private byte[]? _fotoActualBytes;
+        private Documento? _documentoEnEdicion; // Para saber qué ID actualizar
 
-        // Propiedades de la Pantalla Principal
-        [ObservableProperty] private string versionApp;
-        [ObservableProperty] private string estadoSincronizacion = "Base de datos local activa";
-        [ObservableProperty] private double progresoSincronizacion = 1.0;
-
-        // Propiedades del Formulario
-        [ObservableProperty] private ObservableCollection<Documento> documentos;
-        [ObservableProperty] private string nombreDoc;
-        [ObservableProperty] private string numeroDoc;
-        [ObservableProperty] private string descripcionDoc;
-        [ObservableProperty] private DateTime fechaVencimiento = DateTime.Now;
-        [ObservableProperty] private int diasAnticipacion = 5;
-        [ObservableProperty] private int diasRepeticion = 1;
-        [ObservableProperty] private byte[] datosFotoTemporal;
-
-        [ObservableProperty] private Documento documentoSeleccionado;
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(TextoBotonGuardar))]
-        private bool estaEditando;
-
-        public string TextoBotonGuardar => EstaEditando ? "ACTUALIZAR" : "GUARDAR DOCUMENTO";
-
-        public MainViewModel(ServicioBaseDatos servicioBaseDatos, IServicioNotificaciones servicioNotificaciones)
+        // --- PROPIEDADES ---
+        private string nombreDoc = string.Empty;
+        public string NombreDoc
         {
-            _servicioBaseDatos = servicioBaseDatos;
-            _servicioNotificaciones = servicioNotificaciones;
-            Documentos = new ObservableCollection<Documento>();
-
-            // Cargar versión dinámica
-            VersionApp = $"Versión: {AppInfo.VersionString} (Build {AppInfo.BuildString})";
-
-            _ = CargarDocumentos();
+            get => nombreDoc;
+            set { nombreDoc = value; OnPropertyChanged(); }
         }
 
-        [RelayCommand]
-        public async Task TomarFoto()
+        private string numeroDoc = string.Empty;
+        public string NumeroDoc
+        {
+            get => numeroDoc;
+            set { numeroDoc = value; OnPropertyChanged(); }
+        }
+
+        private DateTime fechaVencimiento = DateTime.Today;
+        public DateTime FechaVencimiento
+        {
+            get => fechaVencimiento;
+            set { fechaVencimiento = value; OnPropertyChanged(); }
+        }
+
+        private string diasAnticipacion = "1";
+        public string DiasAnticipacion
+        {
+            get => diasAnticipacion;
+            set { diasAnticipacion = value; OnPropertyChanged(); }
+        }
+
+        private bool estaEditando = false;
+        public bool EstaEditando
+        {
+            get => estaEditando;
+            set
+            {
+                estaEditando = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(TextoBotonGuardar));
+            }
+        }
+
+        public string TextoBotonGuardar => EstaEditando ? "Actualizar Documento" : "Guardar Documento";
+
+        public ObservableCollection<Documento> Documentos { get; set; } = new ObservableCollection<Documento>();
+
+        // --- COMANDOS ---
+        public ICommand TomarFotoCommand { get; }
+        public ICommand SeleccionarFotoCommand { get; }
+        public ICommand GuardarDocumentoCommand { get; }
+        public ICommand CancelarEdicionCommand { get; }
+        public ICommand PrepararEdicionCommand { get; }
+        public ICommand EliminarDocumentoCommand { get; }
+        public ICommand VerImagenCommand { get; }
+        public ICommand CargarDocumentosCommand { get; }
+
+        // Inyección de dependencias en el constructor
+        public MainViewModel(DatabaseService databaseService)
+        {
+            _databaseService = databaseService;
+
+            TomarFotoCommand = new Command(async () => await TomarFoto());
+            SeleccionarFotoCommand = new Command(async () => await SeleccionarFoto());
+            GuardarDocumentoCommand = new Command(async () => await GuardarDocumento());
+            CancelarEdicionCommand = new Command(CancelarEdicion);
+            PrepararEdicionCommand = new Command<Documento>(PrepararEdicion);
+            EliminarDocumentoCommand = new Command<Documento>(async (doc) => await EliminarDocumento(doc));
+            VerImagenCommand = new Command<Documento>(async (doc) => await VerImagen(doc));
+            CargarDocumentosCommand = new Command(async () => await CargarDocumentos());
+
+            // Cargar datos al iniciar
+            Task.Run(async () => await CargarDocumentos());
+        }
+
+        private async Task CargarDocumentos()
+        {
+            var docs = await _databaseService.ObtenerDocumentosAsync();
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Documentos.Clear();
+                foreach (var doc in docs)
+                {
+                    Documentos.Add(doc);
+                }
+            });
+        }
+
+        private async Task GuardarDocumento()
+        {
+            if (string.IsNullOrWhiteSpace(NombreDoc))
+            {
+                await Application.Current!.MainPage!.DisplayAlert("Error", "El nombre es obligatorio", "OK");
+                return;
+            }
+
+            int dias = int.TryParse(DiasAnticipacion, out int d) ? d : 1;
+
+            if (EstaEditando && _documentoEnEdicion != null)
+            {
+                // Actualizar existente
+                _documentoEnEdicion.Nombre = NombreDoc;
+                _documentoEnEdicion.NumeroDocumento = NumeroDoc;
+                _documentoEnEdicion.FechaVencimiento = FechaVencimiento;
+                _documentoEnEdicion.DiasAnticipacion = dias;
+
+                // Solo actualizamos la foto si el usuario tomó una nueva, si no, mantenemos la anterior
+                if (_fotoActualBytes != null)
+                {
+                    _documentoEnEdicion.DatosFoto = _fotoActualBytes;
+                }
+
+                await _databaseService.GuardarDocumentoAsync(_documentoEnEdicion);
+            }
+            else
+            {
+                // Crear nuevo
+                var nuevoDoc = new Documento
+                {
+                    Nombre = NombreDoc,
+                    NumeroDocumento = NumeroDoc,
+                    FechaVencimiento = FechaVencimiento,
+                    DiasAnticipacion = dias,
+                    DatosFoto = _fotoActualBytes
+                };
+
+                await _databaseService.GuardarDocumentoAsync(nuevoDoc);
+            }
+
+            CancelarEdicion();
+            await CargarDocumentos(); // Recargar lista desde BD
+        }
+
+        private void PrepararEdicion(Documento doc)
+        {
+            _documentoEnEdicion = doc;
+            EstaEditando = true;
+            NombreDoc = doc.Nombre;
+            NumeroDoc = doc.NumeroDocumento;
+            FechaVencimiento = doc.FechaVencimiento;
+            DiasAnticipacion = doc.DiasAnticipacion.ToString();
+            _fotoActualBytes = null; // Reiniciar temporal, pero mantenemos la foto original en _documentoEnEdicion
+        }
+
+        private async Task EliminarDocumento(Documento doc)
+        {
+            bool confirmar = await Application.Current!.MainPage!.DisplayAlert("Eliminar", $"¿Deseas eliminar '{doc.Nombre}'?", "Sí", "No");
+            if (confirmar)
+            {
+                await _databaseService.EliminarDocumentoAsync(doc);
+                await CargarDocumentos();
+            }
+        }
+
+        private void CancelarEdicion()
+        {
+            EstaEditando = false;
+            _documentoEnEdicion = null;
+            NombreDoc = string.Empty;
+            NumeroDoc = string.Empty;
+            FechaVencimiento = DateTime.Today;
+            DiasAnticipacion = "1";
+            _fotoActualBytes = null;
+        }
+
+        // --- LÓGICA DE FOTOS Y VISUALIZACIÓN ---
+        private async Task TomarFoto()
         {
             try
             {
                 if (MediaPicker.Default.IsCaptureSupported)
                 {
-                    var foto = await MediaPicker.Default.CapturePhotoAsync();
-                    if (foto != null)
+                    FileResult? photo = await MediaPicker.Default.CapturePhotoAsync();
+                    if (photo != null)
                     {
-                        using var stream = await foto.OpenReadAsync();
-                        DatosFotoTemporal = await ComprimirImagenAsync(stream);
+                        using var stream = await photo.OpenReadAsync();
+                        using var memoryStream = new MemoryStream();
+                        await stream.CopyToAsync(memoryStream);
+                        _fotoActualBytes = memoryStream.ToArray();
+                        await Application.Current!.MainPage!.DisplayAlert("Éxito", "Foto capturada", "OK");
                     }
                 }
             }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
+            catch (Exception ex)
+            {
+                await Application.Current!.MainPage!.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
 
-        [RelayCommand]
-        public async Task SeleccionarFoto()
+        private async Task SeleccionarFoto()
         {
             try
             {
-                var foto = await MediaPicker.Default.PickPhotoAsync();
-                if (foto != null)
+                FileResult? photo = await MediaPicker.Default.PickPhotoAsync();
+                if (photo != null)
                 {
-                    using var stream = await foto.OpenReadAsync();
-                    DatosFotoTemporal = await ComprimirImagenAsync(stream);
+                    using var stream = await photo.OpenReadAsync();
+                    using var memoryStream = new MemoryStream();
+                    await stream.CopyToAsync(memoryStream);
+                    _fotoActualBytes = memoryStream.ToArray();
+                    await Application.Current!.MainPage!.DisplayAlert("Éxito", "Imagen seleccionada", "OK");
                 }
             }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
-        }
-
-        private async Task<byte[]> ComprimirImagenAsync(Stream flujo)
-        {
-            Microsoft.Maui.Graphics.IImage imagen = PlatformImage.FromStream(flujo);
-            if (imagen == null) return null;
-            var redimensionada = imagen.Downsize(1024, 1024, true);
-            using var ms = new MemoryStream();
-            await redimensionada.SaveAsync(ms, ImageFormat.Jpeg, 0.75f);
-            return ms.ToArray();
-        }
-
-        [RelayCommand]
-        public async Task GuardarDocumento()
-        {
-            if (string.IsNullOrWhiteSpace(NombreDoc)) return;
-
-            if (EstaEditando && DocumentoSeleccionado != null)
+            catch (Exception ex)
             {
-                DocumentoSeleccionado.Nombre = NombreDoc;
-                DocumentoSeleccionado.NumeroDocumento = NumeroDoc;
-                DocumentoSeleccionado.Descripcion = DescripcionDoc;
-                DocumentoSeleccionado.FechaVencimiento = FechaVencimiento;
-                DocumentoSeleccionado.DiasAnticipacion = DiasAnticipacion;
-                DocumentoSeleccionado.DiasRepeticion = DiasRepeticion;
-                DocumentoSeleccionado.DatosFoto = DatosFotoTemporal;
-                DocumentoSeleccionado.FechaProximoRecordatorio = FechaVencimiento.AddDays(-DiasAnticipacion);
-
-                await _servicioBaseDatos.GuardarDocumentoAsync(DocumentoSeleccionado);
+                await Application.Current!.MainPage!.DisplayAlert("Error", ex.Message, "OK");
             }
-            else
+        }
+
+        private async Task VerImagen(Documento documento)
+        {
+            if (documento?.DatosFoto == null || documento.DatosFoto.Length == 0)
             {
-                var nuevo = new Documento
-                {
-                    Nombre = NombreDoc,
-                    NumeroDocumento = NumeroDoc,
-                    Descripcion = DescripcionDoc,
-                    FechaVencimiento = FechaVencimiento,
-                    DiasAnticipacion = DiasAnticipacion,
-                    DiasRepeticion = DiasRepeticion,
-                    DatosFoto = DatosFotoTemporal,
-                    FechaProximoRecordatorio = FechaVencimiento.AddDays(-DiasAnticipacion)
-                };
-                await _servicioBaseDatos.GuardarDocumentoAsync(nuevo);
+                await Application.Current!.MainPage!.DisplayAlert("Aviso", "Sin imagen adjunta.", "OK");
+                return;
             }
-
-            LimpiarFormulario();
-            await CargarDocumentos();
+            var imageSource = ImageSource.FromStream(() => new MemoryStream(documento.DatosFoto));
+            var paginaImagen = new ContentPage
+            {
+                Title = documento.Nombre,
+                BackgroundColor = Colors.Black,
+                Content = new Grid { Children = { new Image { Source = imageSource, Aspect = Aspect.AspectFit, HorizontalOptions = LayoutOptions.Fill, VerticalOptions = LayoutOptions.Fill } } }
+            };
+            if (Application.Current.MainPage is Shell shell) await shell.Navigation.PushAsync(paginaImagen);
+            else await Application.Current.MainPage.Navigation.PushAsync(paginaImagen);
         }
 
-        [RelayCommand]
-        public void PrepararEdicion(Documento doc)
-        {
-            DocumentoSeleccionado = doc;
-            NombreDoc = doc.Nombre;
-            NumeroDoc = doc.NumeroDocumento;
-            DescripcionDoc = doc.Descripcion;
-            FechaVencimiento = doc.FechaVencimiento;
-            DiasAnticipacion = doc.DiasAnticipacion;
-            DiasRepeticion = doc.DiasRepeticion;
-            DatosFotoTemporal = doc.DatosFoto;
-            EstaEditando = true;
-        }
-
-        [RelayCommand]
-        public void CancelarEdicion() => LimpiarFormulario();
-
-        [RelayCommand]
-        public async Task EliminarDocumento(Documento doc)
-        {
-            if (doc == null) return;
-            await _servicioBaseDatos.EliminarDocumentoAsync(doc);
-            await CargarDocumentos();
-        }
-
-        private void LimpiarFormulario()
-        {
-            NombreDoc = string.Empty;
-            NumeroDoc = string.Empty;
-            DescripcionDoc = string.Empty;
-            FechaVencimiento = DateTime.Now;
-            DiasAnticipacion = 5;
-            DiasRepeticion = 1;
-            DatosFotoTemporal = null;
-            DocumentoSeleccionado = null;
-            EstaEditando = false;
-        }
-
-        [RelayCommand]
-        public async Task CargarDocumentos()
-        {
-            var items = await _servicioBaseDatos.ObtenerDocumentosAsync();
-            Documentos.Clear();
-            foreach (var item in items) Documentos.Add(item);
-        }
-
-        [RelayCommand]
-        public void Salir() => Application.Current?.Quit();
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

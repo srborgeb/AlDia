@@ -1,13 +1,16 @@
-﻿using AlDia.ViewModels;
-
-namespace AlDia
+﻿namespace AlDia
 {
     public partial class AppShell : Shell
     {
-        public AppShell(MainViewModel viewModel)
+        public AppShell()
         {
             InitializeComponent();
-            BindingContext = viewModel;
+        }
+
+        private void OnExitClicked(object sender, EventArgs e)
+        {
+            // Cierra la aplicación
+            Application.Current?.Quit();
         }
     }
 }
