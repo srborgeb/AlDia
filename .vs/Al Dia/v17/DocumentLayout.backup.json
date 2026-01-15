@@ -3,8 +3,68 @@
   "WorkspaceRootPath": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\views\\paginadocumentos.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:views\\paginadocumentos.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\models\\documento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:models\\documento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\al dia.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:al dia.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml||{6B79B2C4-8503-4A04-8248-ADCEF2B49CB1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml||{6B79B2C4-8503-4A04-8248-ADCEF2B49CB1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\views\\paginaconfiguracion.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:views\\paginaconfiguracion.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\services\\servicionotificaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:services\\servicionotificaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\views\\paginaconfiguracion.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:views\\paginaconfiguracion.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\views\\paginadocumentos.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:views\\paginadocumentos.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|d:\\desarrollo\\codigos\\maui\\aldia\\platforms\\android\\androidmanifest.xml||{6B79B2C4-8503-4A04-8248-ADCEF2B49CB1}",
+      "RelativeMoniker": "D:0:0:{A6903AF0-AC07-4314-9A99-86A51E8B2A33}|Al Dia.csproj|solutionrelative:platforms\\android\\androidmanifest.xml||{6B79B2C4-8503-4A04-8248-ADCEF2B49CB1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +82,210 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "AppShell.xaml.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\AppShell.xaml.cs",
+              "RelativeDocumentMoniker": "AppShell.xaml.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\AppShell.xaml.cs",
+              "RelativeToolTip": "AppShell.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T22:10:34.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\AppShell.xaml",
+              "RelativeDocumentMoniker": "AppShell.xaml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\AppShell.xaml",
+              "RelativeToolTip": "AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-14T21:55:52.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Documento.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Models\\Documento.cs",
+              "RelativeDocumentMoniker": "Models\\Documento.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Models\\Documento.cs",
+              "RelativeToolTip": "Models\\Documento.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvyUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T21:59:26.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\MauiProgram.cs",
               "RelativeDocumentMoniker": "MauiProgram.cs",
               "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\MauiProgram.cs",
               "RelativeToolTip": "MauiProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-14T18:42:54.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T21:55:33.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PaginaDocumentos.xaml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaDocumentos.xaml",
+              "RelativeDocumentMoniker": "Views\\PaginaDocumentos.xaml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaDocumentos.xaml",
+              "RelativeToolTip": "Views\\PaginaDocumentos.xaml",
+              "ViewState": "AgIAADcAAAAAAAAAAAAMwEMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-14T22:12:53.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Al Dia",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj",
+              "RelativeDocumentMoniker": "Al Dia.csproj",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj",
+              "RelativeToolTip": "Al Dia.csproj",
+              "ViewState": "AgIAABoAAAAAAAAAAAAnwDMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-14T21:51:32.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-14T21:55:36.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T22:02:31.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\MainPage.xaml",
+              "RelativeDocumentMoniker": "MainPage.xaml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\MainPage.xaml",
+              "RelativeToolTip": "MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-14T22:01:07.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ServicioNotificaciones.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Services\\ServicioNotificaciones.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioNotificaciones.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Services\\ServicioNotificaciones.cs",
+              "RelativeToolTip": "Services\\ServicioNotificaciones.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswBAAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T22:49:47.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AndroidManifest.xml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml",
+              "RelativeDocumentMoniker": "obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml",
+              "RelativeToolTip": "obj\\Debug\\net8.0-android\\android\\AndroidManifest.xml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2026-01-14T23:09:38.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PaginaConfiguracion.xaml.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaConfiguracion.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\PaginaConfiguracion.xaml.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaConfiguracion.xaml.cs",
+              "RelativeToolTip": "Views\\PaginaConfiguracion.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T22:16:29.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PaginaConfiguracion.xaml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaConfiguracion.xaml",
+              "RelativeDocumentMoniker": "Views\\PaginaConfiguracion.xaml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaConfiguracion.xaml",
+              "RelativeToolTip": "Views\\PaginaConfiguracion.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-14T22:15:47.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PaginaDocumentos.xaml.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaDocumentos.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\PaginaDocumentos.xaml.cs",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Views\\PaginaDocumentos.xaml.cs",
+              "RelativeToolTip": "Views\\PaginaDocumentos.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T22:13:47.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AndroidManifest.xml",
+              "DocumentMoniker": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Platforms\\Android\\AndroidManifest.xml",
+              "RelativeDocumentMoniker": "Platforms\\Android\\AndroidManifest.xml",
+              "ToolTip": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Platforms\\Android\\AndroidManifest.xml",
+              "RelativeToolTip": "Platforms\\Android\\AndroidManifest.xml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAnwB8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2026-01-14T22:04:21.096Z",
               "EditorCaption": ""
             }
           ]

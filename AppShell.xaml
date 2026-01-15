@@ -4,12 +4,34 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlDia"
-    Shell.FlyoutBehavior="Disabled"
-    Title="AlDia">
+    xmlns:views="clr-namespace:AlDia.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Al Día">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"
-        />
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="150" BackgroundColor="{DynamicResource Primary}">
+            <Label Text="Al Día" 
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   FontSize="24"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Inicio" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Mis Documentos" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate views:PaginaDocumentos}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Configuración" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate views:PaginaConfiguracion}" />
+    </FlyoutItem>
+
+    <MenuItem Text="Salir" 
+              Command="{Binding SalirCommand}" />
+
 </Shell>

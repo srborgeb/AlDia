@@ -1,69 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:AlDia.ViewModels"
-             xmlns:models="clr-namespace:AlDia.Models"
-             xmlns:converters="clr-namespace:AlDia.Converters"
-             x:Class="AlDia.MainPage"
-             Title="Al Día - Mis Documentos">
+             x:Class="AlDia.MainPage">
 
-    <ContentPage.Resources>
-        <converters:ConvertidorBytesAImagen x:Key="ConvertidorBytesAImagen" />
-    </ContentPage.Resources>
+    <Grid RowDefinitions="*, Auto, Auto" Padding="30">
 
-    <Grid RowDefinitions="Auto, *, Auto" Padding="20" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="Center" Spacing="20">
+            <Label Text="Mantente al Día"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource Primary}"/>
 
-        <Frame Grid.Row="0" Margin="0,0,0,20" CornerRadius="10" HasShadow="True">
-            <VerticalStackLayout Spacing="10">
-                <HorizontalStackLayout Spacing="5" IsVisible="{Binding EstaEditando}">
-                    <Label Text="✏️ Editando documento" FontAttributes="Italic" TextColor="{StaticResource Primary}" FontSize="12"/>
-                    <Button Text="X" Command="{Binding CancelarEdicionCommand}" BackgroundColor="Transparent" TextColor="Red" Padding="0" HeightRequest="20"/>
-                </HorizontalStackLayout>
+            <Image Source="appicon.png"
+                   HeightRequest="200"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
 
-                <Entry Placeholder="Título del documento" Text="{Binding NuevoTitulo}" FontAttributes="Bold"/>
-                <Editor Placeholder="Descripción o detalles..." Text="{Binding NuevaDescripcion}" AutoSize="TextChanges" HeightRequest="60" />
+        <!-- Barra de Estado de Sincronización -->
+        <VerticalStackLayout Grid.Row="1" Margin="0,0,0,20">
+            <Label Text="{Binding EstadoSincronizacion}" 
+                   FontSize="12" 
+                   HorizontalOptions="Center" 
+                   TextColor="Gray"/>
+            <ProgressBar Progress="{Binding ProgresoSincronizacion}" 
+                         ProgressColor="{StaticResource Primary}" />
+        </VerticalStackLayout>
 
-                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" VerticalOptions="Center">
-                    <Label Text="Renovar cada (días):" VerticalOptions="Center" FontSize="14" />
-                    <Entry Grid.Column="1" Text="{Binding DiasRepeticionTexto}" Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" />
-                </Grid>
-
-                <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
-                    <Button Grid.Column="0" Text="📷 Cámara" Command="{Binding TomarFotoCommand}" BackgroundColor="#2196F3" TextColor="White" />
-                    <Button Grid.Column="1" Text="📁 Galería" Command="{Binding SeleccionarFotoCommand}" BackgroundColor="Gray" TextColor="White" />
-                </Grid>
-
-                <Button Text="{Binding TextoBotonGuardar}" Command="{Binding GuardarDocumentoCommand}" BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" />
-            </VerticalStackLayout>
-        </Frame>
-
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Documentos}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Documento">
-                    <Frame Margin="0,5" Padding="12" CornerRadius="8" HasShadow="False" BorderColor="#E0E0E0">
-                        <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
-                            <Image Grid.Column="0" Source="{Binding DatosFoto, Converter={StaticResource ConvertidorBytesAImagen}}" WidthRequest="60" HeightRequest="60" Aspect="AspectFill" IsVisible="{Binding TieneFoto}">
-                                <Image.Clip>
-                                    <RoundRectangleGeometry CornerRadius="10" />
-                                </Image.Clip>
-                            </Image>
-
-                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="15" />
-                                <Label Text="{Binding TextoRepeticion}" FontSize="10" TextColor="#2196F3" FontAttributes="Italic" />
-                                <Label Text="{Binding FechaProximoRecordatorio, StringFormat='Próximo: {0:dd/MM/yy}'}" FontSize="10" TextColor="DarkOrange" />
-                            </VerticalStackLayout>
-
-                            <HorizontalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="5">
-                                <Button Text="✏️" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=PrepararEdicionCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" TextColor="Blue" FontSize="18" />
-                                <Button Text="🗑" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EliminarDocumentoCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" TextColor="Red" FontSize="18" />
-                            </HorizontalStackLayout>
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <Label Grid.Row="2" Text="Al Día - Gestión y Renovación" HorizontalOptions="Center" TextColor="Gray" FontSize="11" Margin="0,10,0,0" />
+        <!-- Versión de la Aplicación -->
+        <Label Grid.Row="2" 
+               Text="{Binding VersionApp}" 
+               HorizontalOptions="Center" 
+               FontSize="10" 
+               TextColor="Silver" />
     </Grid>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using AlDia.Models;
+using System;
 
 namespace AlDia.Services
 {
@@ -12,6 +13,7 @@ namespace AlDia.Services
     {
         public void ProgramarNotificacion(Documento documento)
         {
+            // Cambiado 'Titulo' por 'Nombre' y asegurando el uso de 'FechaProximoRecordatorio'
             if (documento.DiasRepeticion <= 0 && documento.FechaProximoRecordatorio == DateTime.MinValue) return;
 
             var fechaNotificacion = documento.FechaProximoRecordatorio;
@@ -19,13 +21,13 @@ namespace AlDia.Services
             if (fechaNotificacion < DateTime.Now)
                 return;
 
-            // Simulación de programación de alarma nativa
-            Console.WriteLine($"[SISTEMA] Notificación programada: {documento.Titulo} para el {fechaNotificacion}");
+            // Simulación de despacho al sistema
+            System.Diagnostics.Debug.WriteLine($"[SISTEMA] Notificación programada: {documento.Nombre} para el {fechaNotificacion}");
         }
 
         public void CancelarNotificacion(int documentoId)
         {
-            Console.WriteLine($"[SISTEMA] Notificación {documentoId} cancelada");
+            System.Diagnostics.Debug.WriteLine($"[SISTEMA] Notificación {documentoId} cancelada");
         }
     }
 }

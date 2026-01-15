@@ -1,50 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <!-- Se ha dejado solo Android para eliminar errores de plataformas no configuradas o fuera de soporte -->
-        <TargetFrameworks>net8.0-android</TargetFrameworks>
-        <!-- TargetFrameworks para Windows se puede agregar aquí en el futuro -->
-        <OutputType>Exe</OutputType>
-        <RootNamespace>AlDia</RootNamespace>
-        <UseMaui>true</UseMaui>
-        <SingleProject>true</SingleProject>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<!-- Compilación exclusiva para Android -->
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>AlDia</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-        <!-- Configuración de la Aplicación -->
-        <ApplicationTitle>Al Dia</ApplicationTitle>
-        <ApplicationId>com.companyname.aldia</ApplicationId>
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-        <ApplicationVersion>1</ApplicationVersion>
+		<!-- Configuración de la Aplicación -->
+		<ApplicationTitle>Al Dia</ApplicationTitle>
+		<ApplicationId>com.companyname.aldia</ApplicationId>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 
-        <!-- Versiones mínimas de SO -->
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-    </PropertyGroup>
+		<!-- CORRECCIÓN ERROR XA0003: 
+             Se usa un formato más corto (yyMMddHH) para no exceder el límite de 32 bits de Android.
+             Esto genera un número como 26011419 (Año 26, Mes 01, Día 14, Hora 19). -->
+		<ApplicationVersion>$([System.DateTime]::Now.ToString("yyMMddHH"))</ApplicationVersion>
 
-    <ItemGroup>
-        <!-- Recursos (Iconos, Imágenes, Fuentes) -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-        <MauiImage Include="Resources\Images\*" />
-        <MauiFont Include="Resources\Fonts\*" />
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-    </ItemGroup>
+		<!-- Versiones mínimas de SO -->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
 
-    <ItemGroup>
-        <!-- PAQUETES NUGET GENERALES -->
-        <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-        <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
-        <PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-    </ItemGroup>
+	<ItemGroup>
+		<!-- Recursos (Iconos, Imágenes, Fuentes) -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiImage Include="Resources\Images\*" />
+		<MauiFont Include="Resources\Fonts\*" />
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
 
-    <!-- SOLUCIÓN DE CONFLICTOS ANDROID (Dependency Hell) -->
-    <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-        <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.5" />
-        <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5" />
-        <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.3" />
-        <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.3" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<!-- Solución de conflictos de dependencias en Android -->
+	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.5" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5" />
+		<PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.3" />
+		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.3" />
+	</ItemGroup>
 
 </Project>

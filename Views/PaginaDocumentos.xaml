@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:AlDia.ViewModels"
+             xmlns:models="clr-namespace:AlDia.Models"
+             xmlns:converters="clr-namespace:AlDia.Converters"
+             x:Class="AlDia.Views.PaginaDocumentos"
+             Title="Mis Documentos">
+
+    <ContentPage.Resources>
+        <converters:ConvertidorBytesAImagen x:Key="ConvertidorBytesAImagen" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *" Padding="20" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
+
+        <Frame Grid.Row="0" Margin="0,0,0,20" HasShadow="True">
+            <VerticalStackLayout Spacing="10">
+                <Entry Placeholder="Nombre del documento" Text="{Binding NombreDoc}" FontAttributes="Bold" />
+                <Entry Placeholder="Número o ID" Text="{Binding NumeroDoc}" />
+
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Text="Vencimiento:" VerticalOptions="Center" />
+                    <DatePicker Grid.Column="1" Date="{Binding FechaVencimiento}" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <Label Text="Días de aviso previo:" VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding DiasAnticipacion}" Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                    <Button Grid.Column="0" Text="📷 Cámara" Command="{Binding TomarFotoCommand}" BackgroundColor="#2196F3" />
+                    <Button Grid.Column="1" Text="📁 Galería" Command="{Binding SeleccionarFotoCommand}" BackgroundColor="Gray" />
+                </Grid>
+
+                <Button Text="{Binding TextoBotonGuardar}" Command="{Binding GuardarDocumentoCommand}" BackgroundColor="{StaticResource Primary}" />
+                <Button Text="Cancelar" IsVisible="{Binding EstaEditando}" Command="{Binding CancelarEdicionCommand}" BackgroundColor="Transparent" TextColor="Red" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Documentos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Documento">
+                    <Frame Margin="0,5" Padding="10">
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+                            <Image Source="{Binding DatosFoto, Converter={StaticResource ConvertidorBytesAImagen}}" WidthRequest="60" HeightRequest="60" Aspect="AspectFill" IsVisible="{Binding TieneFoto}">
+                                <Image.Clip>
+                                    <RoundRectangleGeometry CornerRadius="10" />
+                                </Image.Clip>
+                            </Image>
+
+                            <VerticalStackLayout Grid.Column="1" Margin="15,0" VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                <Label Text="{Binding NumeroDocumento}" FontSize="12" TextColor="Gray" />
+                                <Label Text="{Binding FechaVencimiento, StringFormat='Vence: {0:dd/MM/yyyy}'}" FontSize="11" TextColor="Red" />
+                            </VerticalStackLayout>
+
+                            <HorizontalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                <Button Text="✏️" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=PrepararEdicionCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" FontSize="20" />
+                                <Button Text="🗑" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EliminarDocumentoCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" FontSize="20" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

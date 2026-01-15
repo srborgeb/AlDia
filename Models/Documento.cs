@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace AlDia.Models
 {
@@ -7,20 +8,26 @@ namespace AlDia.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Titulo { get; set; }
+        public string Nombre { get; set; }
+
+        public string NumeroDocumento { get; set; }
 
         public string Descripcion { get; set; }
 
+        public DateTime FechaVencimiento { get; set; } = DateTime.Now;
+
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
-        // Nueva propiedad para rastrear cuándo debe sonar la alarma
+        // Propiedad para la lógica de notificaciones
         public DateTime FechaProximoRecordatorio { get; set; }
 
-        public bool EstaAlDia { get; set; }
+        public int DiasAnticipacion { get; set; }
+
+        public int DiasRepeticion { get; set; }
 
         public byte[] DatosFoto { get; set; }
 
-        public int DiasRepeticion { get; set; }
+        public bool EstaAlDia { get; set; }
 
         [Ignore]
         public bool TieneFoto => DatosFoto != null && DatosFoto.Length > 0;

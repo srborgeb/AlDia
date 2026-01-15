@@ -1,10 +1,10 @@
-﻿using AlDia.Services;
+﻿using Microsoft.Extensions.Logging;
+using AlDia.Services;
 using AlDia.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-// Directivas necesarias para resolver errores de compilación
+using AlDia.Views; // Espacio de nombres para las vistas
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AlDia
 {
@@ -14,26 +14,29 @@ namespace AlDia
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>() // Requiere Microsoft.Maui.Controls.Hosting
+                .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // Registro de servicios (Inyección de dependencias)
-            // Requiere Microsoft.Extensions.DependencyInjection (incluido por defecto en el SDK de MAUI)
+            // Registro de Servicios
             builder.Services.AddSingleton<ServicioBaseDatos>();
             builder.Services.AddSingleton<IServicioNotificaciones, ServicioNotificaciones>();
 
-            // Registro de ViewModels y Páginas
+            // Registro de ViewModels
             builder.Services.AddSingleton<MainViewModel>();
+
+            // Registro de Páginas (Necesario para que el Shell y la DI funcionen)
+            builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<PaginaDocumentos>();
+            builder.Services.AddSingleton<PaginaConfiguracion>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
     }
