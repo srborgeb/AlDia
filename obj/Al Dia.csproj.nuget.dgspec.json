@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj": {}
+    "D:\\Desarrollo\\MAUI\\AlDia\\Al Dia.csproj": {}
   },
   "projects": {
-    "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj": {
+    "D:\\Desarrollo\\MAUI\\AlDia\\Al Dia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj",
+        "projectUniqueName": "D:\\Desarrollo\\MAUI\\AlDia\\Al Dia.csproj",
         "projectName": "Al Dia",
-        "projectPath": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\Al Dia.csproj",
+        "projectPath": "D:\\Desarrollo\\MAUI\\AlDia\\Al Dia.csproj",
         "packagesPath": "C:\\Users\\srbor\\.nuget\\packages\\",
-        "outputPath": "D:\\Desarrollo\\Codigos\\MAUI\\AlDia\\obj\\",
+        "outputPath": "D:\\Desarrollo\\MAUI\\AlDia\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -26,6 +26,16 @@
           "net8.0-android"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2024.2.20\\FastReport .NET Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2024.2.20\\FastReport Avalonia Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2024.2.20\\FastReport WPF Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastCube .NET Trial\\Nuget": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport .NET Avalonia Pack Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport .NET Mono Pack Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport .NET WEB Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport .NET WPF Pack Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport .NET WinForms Pack Trial\\Nugets": {},
+          "C:\\Program Files (x86)\\Fast Reports\\.NET\\2025.1.14\\FastReport Business Graphics .NET Trial\\Nuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
@@ -71,7 +81,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.21, )",
+              "version": "[8.0.20, )",
               "autoReferenced": true
             },
             "Plugin.LocalNotification": {
@@ -144,7 +154,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

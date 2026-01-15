@@ -12,7 +12,7 @@
                    HorizontalOptions="Center"
                    TextColor="{StaticResource Primary}"/>
 
-            <Image Source="appicon.png"
+            <Image Source="appiconfg.png"
                    HeightRequest="200"
                    HorizontalOptions="Center" />
         </VerticalStackLayout>
